@@ -29,8 +29,8 @@ class Rectangle(Shape):
 
 class Square(Rectangle):
     """
-    Extends the Shape class to render a Square object with a side length. Includes
-    a method for drawing the Square to a canvas
+    Extends the Rectangle class to render a Square object with a side length.
+    Includes a method for drawing the Square to a canvas
     """
     def __init__(self, x, y, side_length, color):
         super().__init__(x, y, side_length, side_length, color)
