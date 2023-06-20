@@ -14,8 +14,10 @@ class Shape:
         """
         Draw the shape on the given canvas
         """
+        x_slice = self.x + self.height
+        y_slice = self.y + self.width
         # Change a slice of the canvas RGB array with new values
-        canvas.data[self.x:self.x + self.height, self.y:self.y + self.width] = self.color
+        canvas.data[self.x:x_slice, self.y:y_slice] = self.color
 
 
 class Rectangle(Shape):
