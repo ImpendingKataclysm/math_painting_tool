@@ -1,6 +1,7 @@
 import numpy as np
 
 from PIL import Image
+from validator import Validator
 
 
 class Canvas:
@@ -65,17 +66,13 @@ class CanvasCreator:
         colors and checks that the user input is on the list.
         :return: The color selected by the user
         """
+        color_names = list(self.colors.keys())
+
         print("Choose your background color!")
         print("Available options are:")
-        color_names = list(self.colors.keys())
-        for color in color_names:
-            print(f"\t{color.title()}")
-        canvas_color = input("Enter background color: ").strip().lower()
 
-        while canvas_color not in color_names:
-            print(f"Sorry, {canvas_color} is not an available background color.")
-            canvas_color = input("Enter background color: ").strip().lower()
-
+        canvas_color = self.validator.get_list_select_input(choice_list=color_names,
+                                                            prompt="Enter color: ")
         return self.colors[canvas_color]
 
     def create_canvas(self):

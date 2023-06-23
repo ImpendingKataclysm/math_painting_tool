@@ -36,3 +36,23 @@ class Validator:
             num_input = self.get_valid_numerical_input(prompt)
 
         return num_input
+
+    @staticmethod
+    def get_list_select_input(choice_list, prompt):
+        """
+        Displays a list of choices to the user and prompts them to select an option. The user's
+        choice is then checked to ensure that it is an option in the list. The user will be
+        prompted to keep making choices until they make a choice that is listed.
+        :param choice_list: The list of options available for the user to choose from
+        :param prompt: String that prompts the user for input.
+        :return: The user's selection from the list
+        """
+        for choice in choice_list:
+            print(f"\t{choice.title()}")
+        user_choice = input(prompt).strip().lower()
+
+        while user_choice not in choice_list:
+            print(f"Sorry, {user_choice} is not an available option.")
+            user_choice = input(prompt).strip().lower()
+
+        return user_choice

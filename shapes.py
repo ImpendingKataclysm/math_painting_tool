@@ -1,3 +1,6 @@
+SHAPES = ["square", "rectangle"]
+
+
 class Shape:
     """
     An object to be rendered on a canvas. Attributes include x- and y-coordinates
@@ -12,7 +15,12 @@ class Shape:
 
     def draw(self, canvas):
         """
-        Draw the shape on the given canvas
+        Draws the Shape onto a specified Canvas by changing the RGB values of
+        the canvas to the Shape's background color, starting at the shape's
+        origin and covering the Shape's surface area based on its width and
+        height.
+        :param canvas: The Canvas on which to draw the Shape
+        :return:
         """
         x_slice = self.x + self.height
         y_slice = self.y + self.width
