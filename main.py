@@ -10,6 +10,8 @@ bg_colors = {
 }
 
 img_name = 'my_image'
+
+# Create canvas validator to check user inputs
 canvas_validator = Validator()
 
 # Generate the canvas
@@ -35,7 +37,7 @@ while True:
     green = canvas_validator.get_number_in_range(0, 255, "How much green? ")
     blue = canvas_validator.get_number_in_range(0, 255, "How much blue? ")
 
-    # Get Shape dimensions based on Shape type
+    # Get Shape dimensions based on Shape type and draw the Shape
     if shape_to_draw == 'rectangle':
         width = canvas_validator.get_number_in_range(0, canvas.width + 1,
                                                      "How wide is your rectangle? ")
@@ -44,9 +46,10 @@ while True:
         rect = Rectangle(origin_x, origin_y, width, height, (red, green, blue))
         rect.draw(canvas=canvas)
     elif shape_to_draw == 'square':
-        side_length = canvas_validator.get_positive_numerical_input("How long are the sides?")
+        side_length = canvas_validator.get_number_in_range(0, canvas.width,
+                                                           "How long are the sides?")
         square = Square(origin_x, origin_y, side_length, (red, green, blue))
-        square.draw(canvas=canvas)
+        square.draw(canvas=canvas)Re
     else:
         print("Sorry, we can't draw that shape!")
 
@@ -58,16 +61,3 @@ while True:
 
 # Save the canvas
 canvas.make(image_path=img_name)
-
-
-# square = Square(20, 10, 20, (255, 0, 0))
-# rectangle = Rectangle(40, 50, 30, 50, (100, 0, 100))
-# canvas = Canvas(200, 200, (250, 250, 250))
-#
-# print(f"{square.width} {square.color} ({square.x}, {square.y})")
-# print(f"{rectangle.width} {rectangle.height} {rectangle.color} ({rectangle.x}, {rectangle.y})")
-# print(canvas.data)
-#
-# rectangle.draw(canvas)
-# square.draw(canvas)
-# canvas.make('surface')
