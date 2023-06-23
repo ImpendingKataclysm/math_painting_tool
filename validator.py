@@ -1,22 +1,25 @@
 class Validator:
     """
-    Ensures that user inputs are compatible with the program by handling exceptions
+    Ensures that user inputs are compatible with the program and handles exceptions
     resulting from faulty inputs.
     """
     @staticmethod
     def get_valid_numerical_input(prompt):
         """
-        Converts user input to an integer and displays an error message if the
-        user enters a value that cannot be converted to an integer.
+        Converts user input to an integer. If the user enters a value that cannot be
+        converted to an integer, an error message is displayed. Continues prompting the
+        user for valid numerical input until they enter a value that can be converted to an
+        integer.
         :param prompt: String that prompts the user for input.
-        :return: The Integer value entered by the user, or 0 if the user enters
-        a value that cannot be converted.
+        :return: The Integer value entered by the user, or 0 if the user enters a value that
+        cannot be converted.
         """
-        num_input = 0
-        try:
-            num_input = int(input(prompt))
-        except ValueError:
-            print("We were unable to process that! Please enter a numerical value.")
+        while True:
+            try:
+                num_input = int(input(prompt))
+                break
+            except ValueError:
+                print("We were unable to process that! Please enter a numerical value.")
 
         return num_input
 
@@ -30,12 +33,29 @@ class Validator:
         """
         num_input = self.get_valid_numerical_input(prompt)
 
-        while num_input <= 0:
-            if num_input < 0:
-                print("Please enter a positive number!")
+        while num_input < 0:
+            print("Please enter a positive number!")
             num_input = self.get_valid_numerical_input(prompt)
 
         return num_input
+
+    def get_number_in_range(self, lower, upper, prompt):
+        """
+        Prompt the user to enter a number and ensure that it falls between the specified
+        lower and upper values. If the number is outside the accepted range, continue to
+        prompt the user until they enter a value that falls within the range.
+        :param lower: minimum accepted value
+        :param upper: maximum accepted value
+        :param prompt: String that prompts the user for input.
+        :return: the number entered by the user
+        """
+        number = self.get_valid_numerical_input(prompt)
+
+        while number not in range(lower, upper + 1):
+            print(f"Please enter a number between {lower} and {upper} inclusive")
+            number = self.get_valid_numerical_input(prompt)
+
+        return number
 
     @staticmethod
     def get_list_select_input(choice_list, prompt):

@@ -18,10 +18,37 @@ canvas = canvas_creator.create_canvas()
 
 # Prompt user to generate the shapes:
 while True:
+    # Get type of Shape to draw
     print("Choose one of the following shapes to draw!")
-
     shape_to_draw = canvas_validator.get_list_select_input(choice_list=SHAPES,
-                                                           prompt="Enter shape: ")
+                                                           prompt="Enter shape: "
+                                                           ).strip().lower()
+
+    # Get Shape origin coordinates
+    print(f"Where would you like to put your {shape_to_draw} on the canvas grid?")
+    origin_x = canvas_validator.get_positive_numerical_input("Starting X-Coordinate: ")
+    origin_y = canvas_validator.get_positive_numerical_input("Starting Y-Coordinate: ")
+
+    # Get Shape color
+    print(f"What color is your {shape_to_draw}? Choose the RGB values:")
+    red = canvas_validator.get_number_in_range(0, 255, "How much red? ")
+    green = canvas_validator.get_number_in_range(0, 255, "How much green? ")
+    blue = canvas_validator.get_number_in_range(0, 255, "How much blue? ")
+
+    # Get Shape dimensions based on Shape type
+    if shape_to_draw == 'rectangle':
+        width = canvas_validator.get_number_in_range(0, canvas.width + 1,
+                                                     "How wide is your rectangle? ")
+        height = canvas_validator.get_number_in_range(0, canvas.height + 1,
+                                                      "How tall is your rectangle? ")
+        rect = Rectangle(origin_x, origin_y, width, height, (red, green, blue))
+        rect.draw(canvas=canvas)
+    elif shape_to_draw == 'square':
+        side_length = canvas_validator.get_positive_numerical_input("How long are the sides?")
+        square = Square(origin_x, origin_y, side_length, (red, green, blue))
+        square.draw(canvas=canvas)
+    else:
+        print("Sorry, we can't draw that shape!")
 
     # Ask if the user wants to draw another image or save and exit the program
     keep_drawing = input("Draw another shape? (y/n)").strip().lower()
