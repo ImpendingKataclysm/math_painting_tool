@@ -14,7 +14,7 @@ canvas_validator = Validator()
 
 # Generate the canvas
 canvas_creator = CanvasCreator(bg_colors, img_name, canvas_validator)
-canvas_creator.create_canvas()
+canvas = canvas_creator.create_canvas()
 
 # Prompt user to generate the shapes:
 while True:
@@ -23,10 +23,14 @@ while True:
     shape_to_draw = canvas_validator.get_list_select_input(choice_list=SHAPES,
                                                            prompt="Enter shape: ")
 
+    # Ask if the user wants to draw another image or save and exit the program
     keep_drawing = input("Draw another shape? (y/n)").strip().lower()
 
     if keep_drawing == 'n' or keep_drawing == 'no' or keep_drawing == 'stop':
         break
+
+# Save the canvas
+canvas.make(image_path=img_name)
 
 
 # square = Square(20, 10, 20, (255, 0, 0))

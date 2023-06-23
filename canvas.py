@@ -77,12 +77,10 @@ class CanvasCreator:
 
     def create_canvas(self):
         """
-        Generates the canvas with the user-entered parameters and saves it as
-        an image file.
-        :return:
+        Generates a new Canvas with user-entered parameters.
+        :return: The Canvas object created according to the user's specifications.
         """
         canvas_width = self.get_canvas_width()
         canvas_height = self.get_canvas_height()
         bg_color = self.get_canvas_color()
-        canvas = Canvas(width=canvas_width, height=canvas_height, color=bg_color)
-        canvas.make(self.img_path)
+        return Canvas(width=canvas_width, height=canvas_height, color=bg_color)
